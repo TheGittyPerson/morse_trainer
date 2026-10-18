@@ -7,7 +7,6 @@ module MorseTrainer
   class Error < StandardError; end
 
   # Main run loop
-  def run
-
+  def self.run
   end
 end

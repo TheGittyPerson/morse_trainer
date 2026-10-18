@@ -9,6 +9,9 @@ Style/StringLiterals:
 Style/StringLiteralsInInterpolation:
   EnforcedStyle: double_quotes
 
+Style/StringConcatenation:
+  Mode: conservative
+
 Layout/LineLength:
   Max: 80
 
@@ -19,4 +22,7 @@ Layout/EmptyLineAfterGuardClause:
   Enabled: false
 
 Lint/AmbiguousOperatorPrecedence:
+  Enabled: false
+
+Metrics:
   Enabled: false
