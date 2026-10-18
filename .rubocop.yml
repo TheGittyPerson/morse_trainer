@@ -1,8 +1,22 @@
 AllCops:
   TargetRubyVersion: 3.2
+  ParserEngine: parser_prism
+  StyleGuideBaseURL: https://rubystyle.guide
 
 Style/StringLiterals:
   EnforcedStyle: double_quotes
 
 Style/StringLiteralsInInterpolation:
   EnforcedStyle: double_quotes
+
+Layout/LineLength:
+  Max: 80
+
+Layout/EmptyLineBetweenDefs:
+  NumberOfEmptyLines: [1, 2]
+
+Layout/EmptyLineAfterGuardClause:
+  Enabled: false
+
+Lint/AmbiguousOperatorPrecedence:
+  Enabled: false
