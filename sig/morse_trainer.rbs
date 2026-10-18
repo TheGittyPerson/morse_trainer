@@ -1,0 +1,5 @@
+module MorseTrainer
+  VERSION: String
+
+  def run: -> void
+end
