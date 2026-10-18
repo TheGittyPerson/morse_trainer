@@ -110,9 +110,10 @@ To suggest a feature:
 4. Make and commit your changes.
    - Commit messages should be in the imperative tone without a period.
      - e.g.: `Add test files`, `Fix this function`, `Update README`
-5. Push commits to GitHub (if you have made changes locally on your machine).
-6. Create and submit a pull request.
-7. Optional: Request a review from a maintainer.
+5. Run `rubocop -a` and `minitest` and fix any issues.
+6. Push commits to GitHub (if you have made changes locally on your machine).
+7. Create and submit a pull request.
+8. Optional: Request a review from a maintainer.
 
 [^ TOC](#table-of-contents)
 
@@ -126,7 +127,8 @@ individually (`gem install rubocop`).
 
 After writing your code, run `rubocop` or `rubocop -a` (autocorrect) and fix 
 any formatting or style issues. Make sure RuboCop is using the `.rubocop.yml` 
-config file.
+config file. Then run `minitest` (or `rake test`) to run tests. Fix any 
+issues before pushing.
 
 **Remember to add type signatures** in `sig/` for any new 
 methods/classes/modules!
