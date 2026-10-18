@@ -134,10 +134,6 @@ methods/classes/modules!
 **Tip**: You can run `bin/console` to experiment with the code or debug any
 problems.
 
-This is a relatively small project, so we don't have tests, but it would be 
-nice if someone could write some for us (you can open a PR for this without 
-writing an issue).
-
 [^ TOC](#table-of-contents)
 
 ## Making Your First Contribution
