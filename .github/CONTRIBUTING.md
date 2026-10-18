@@ -1,6 +1,6 @@
 # Contributing to this project
 
-###### How to Contribute to _MorseTrainer_ Repository
+###### How to Contribute to _MorseTrainer_
 
 ## 👋 Greetings!
 
@@ -127,6 +127,9 @@ individually (`gem install rubocop`).
 After writing your code, run `rubocop` or `rubocop -a` (autocorrect) and fix 
 any formatting or style issues. Make sure RuboCop is using the `.rubocop.yml` 
 config file.
+
+**Remember to add type signatures** in `sig/` for any new 
+methods/classes/modules!
 
 **Tip**: You can run `bin/console` to experiment with the code or debug any
 problems.
