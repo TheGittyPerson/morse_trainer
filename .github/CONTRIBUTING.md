@@ -155,4 +155,4 @@ GitHub, here are some links with information that might help:
 [repo]: https://github.com/TheGittyPerson/morse_trainer
 [issues]: https://github.com/TheGittyPerson/morse_trainer/issues
 [pull requests]: https://github.com/TheGittyPerson/morse_trainer/pulls
-[rubocop]: https://www.rubocop.org
+[rubocop]: https://docs.rubocop.org/rubocop/latest/
