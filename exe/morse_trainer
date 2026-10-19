@@ -6,4 +6,4 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include? lib
 
 require "morse_trainer"
 
-MorseTrainer.run(ARGV)
+MorseTrainer.run

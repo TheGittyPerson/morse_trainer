@@ -1,0 +1,22 @@
+class OptionsConfig
+  @path: Pathname
+  @default: Hash[Symbol, Object]
+  @options: Hash[Symbol, Object]
+  @setting_default: bool
+
+  attr_accessor options: Hash[Symbol, Object]
+  attr_accessor setting_default: bool
+
+
+  def set_option: [T] (Symbol option, T value) -> T
+  def set_default: [T] (Symbol option, T value) -> T
+  def reset_options: -> void
+  def get: (Symbol option) -> top?
+  def view: (Symbol option) -> void
+  def view_all: -> void
+
+  private
+
+  def load_json: -> void
+  def save_json: -> void
+end

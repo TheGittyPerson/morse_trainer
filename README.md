@@ -11,7 +11,7 @@ First, you'll need to
 
 Run this to download the required installer and then the app.
 
-```bash
+```shell
 gem install specific_install
 gem specific_install https://github.com/TheGittyPerson/morse_trainer
 ```

@@ -1,5 +1,3 @@
 module MorseTrainer
-  VERSION: String
-
-  def self.run: (args: Array[String]) -> void
+  def self.run: -> void
 end

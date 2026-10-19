@@ -1,0 +1,6 @@
+module UIUtils
+  def error: (String msg, ?kill: bool, ?newline: bool) -> void
+  def input: (String prompt, ?allowed: Array[String] | String,
+              ?error_msg: String?) -> String
+  def join_with_or: (Array[String] | String arr) -> String
+end

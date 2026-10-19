@@ -1,0 +1,9 @@
+class ArgParser
+  @config: OptionsConfig
+  @parser: OptionParser
+
+  attr_accessor parser: OptionParser
+
+  def initialize: (OptionsConfig) -> void
+  def parse: -> Array[String]
+end

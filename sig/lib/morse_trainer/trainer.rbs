@@ -1,0 +1,7 @@
+# Trainer class to manage training loop
+class Trainer
+  @pos_args: Array[String]
+  @config: OptionsConfig
+
+  def initialize: (Array[String] pos_args, OptionsConfig config) -> void
+end

@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
-# Contains morse code translating functionality
+# Contains Morse code translating functionality.
+# Do `using Translator` to apply refinements.
 module Translator
   MORSE_TABLE = {
     "a" => ".-",   "b" => "-...", "c" => "-.-.", "d" => "-..",
@@ -29,7 +30,7 @@ module Translator
     # @param space [String] default = " / "
     # @param replace_unknown_with [String] default = +nil+
     # @return [String]
-    def to_morse(space: "/", replace_unknown_with: nil)
+    def to_morse(space = "/", replace_unknown_with = nil)
       morse_table = MORSE_TABLE.merge({ " " => space })
       each_char.map do |char|
         if morse_table.include?(char.downcase)
@@ -51,7 +52,7 @@ module Translator
     # @param space [String] default = " / "
     # @param replace_invalid_with [String] default = +nil+
     # @return [String]
-    def from_morse(space: "/", replace_invalid_with: nil)
+    def from_morse(space = "/", replace_invalid_with = nil)
       words = split(space)
       letters_each_words = words.map(&:split)
       morse_table = MORSE_TABLE.invert
