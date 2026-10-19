@@ -13,6 +13,6 @@ module MorseTrainer
   def self.run
     config = OptionsConfig.new
     pos_args = ArgParser.new(config).parse
-    Trainer.new(pos_args, config)
+    Trainer.new(pos_args, config).start_training
   end
 end

@@ -9,42 +9,54 @@ require_relative "ui_utils"
 class ArgParser
   include UIUtils
 
-  attr_accessor :parser
+  attr_accessor :opt_parser
 
   # @param config [OptionsConfig]
   def initialize(config)
-    @parser = OptionParser.new do |opts|
+    @opt_parser = OptionParser.new do |opts|
       opts.banner = "Usage: morse_trainer [options]"
-
-      opts.on("-c", "--set-default", "--config",
-              "Sets other passed options as defaults") do
-        config.setting_default = true
-      end
 
       opts.on("-r", "--reset", "Reset default options to original values") do
         config.reset_options
       end
 
-      opts.on("-s", "--silent", "Output Morse code as text instead of sound") do
-        config.set_option(:silent, true)
+      opts.on("-d", "--set-default",
+              "Sets other passed options as defaults") do
+        config.setting_default = true
       end
 
-      opts.on("--[no-]color", "Toggle ANSI-colored text") do |bool|
-        config.set_option(:color, bool)
+      opts.on("-s", "--[no-]silent",
+              "Toggle Morse code output as text (silent) or sound") do |bool|
+        config.set_option(:silent, bool)
       end
 
-      opts.on("-s", "--speed [WPM]", Integer,
+      opts.on("--[no-]ansi", "Toggle ANSI-styled text") do |bool|
+        config.set_option(:ansi, bool)
+      end
+
+      opts.on("-s", "--speed [WPM]", Float,
               "Set playback speed in words per minute") do |speed|
         if speed.nil?
-          p config.get :speed
+          config.view :speed
           exit
+        else
+          config.set_option(:speed, speed)
         end
-        config.set_option(:speed, speed)
       end
 
-      opts.on("-n", "--rounds [COUNT]", Integer,
-              "Set the number of practice rounds") do |rounds|
+      opts.on(
+        "-n", "--rounds [COUNT]", Integer,
+        "Set the number of practice rounds. Pass -1 to do indefinite rounds."
+      ) do |rounds|
+        if rounds.nil?
+          config.view :rounds
+          exit
+        end
         config.set_option(:rounds, rounds)
+      end
+
+      opts.on("-c", "--all-configs", "Show all default option values") do
+        config.view_all
       end
 
       opts.on("-h", "--help", "Show this help message") do
@@ -62,11 +74,12 @@ class ArgParser
   # Reads arguments, deals with flags and options, and removes them from +ARGV+.
   # @return Array[String]
   def parse
-    @parser.parse!
+    @opt_parser.parse!
     # TODO: Add rules to handle invalid option combos
   rescue OptionParser::ParseError => e
     error e.message, kill: false
-    warn parser
+    puts
+    warn @opt_parser
     exit 1
   end
 end

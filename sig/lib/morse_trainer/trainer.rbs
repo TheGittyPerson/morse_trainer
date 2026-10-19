@@ -4,4 +4,10 @@ class Trainer
   @config: OptionsConfig
 
   def initialize: (Array[String] pos_args, OptionsConfig config) -> void
+  def start_training: -> void
+
+  private
+
+  def start_audio_round: -> void
+  def start_text_round: -> void
 end

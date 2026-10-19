@@ -13,9 +13,9 @@ class OptionsConfig
   def initialize
     @path = Pathname.new("~/.config/morse_trainer/config.json").expand_path
     @default = {
-      speed: 15,
-      rounds: 10,
-      color: true,
+      speed: 15.0,
+      rounds: -1,
+      ansi: true,
       silent: false
     }
     @options = @default.dup
@@ -36,11 +36,11 @@ class OptionsConfig
         error "Speed must be between 5 and 75 WPM, inclusive"
       end
     when :rounds
-      unless value.is_a?(Integer) && value.positive?
-        error "Rounds must be a positive integer"
+      unless value.is_a?(Integer) && (value.positive? || value == -1)
+        error "Rounds must be a positive integer or -1"
       end
-    when :color
-      error "Color must be true or false" unless [true, false].include? value
+    when :ansi
+      error "ANSI must be true or false" unless [true, false].include? value
     when :silent
       error "Silent must be true or false" unless [true, false].include? value
     else
@@ -76,15 +76,15 @@ class OptionsConfig
   # Get the value for an option.
   # Outputs an error message and exits on an unknown option.
   # @param option [Symbol]
-  # @return [Object, nil]
+  # @return [Object]
   def get(option)
     @options[option]
   rescue KeyError
     error "Unknown option to get: #{option}"
   end
 
-  # Gets an option value, outputs it, and calls +exit+.
-  # Outputs an error message on an unknown option.
+  # Gets an option value and outputs it.
+  # Outputs an error message and exits on an unknown option.
   # @param option [Symbol]
   def view(option)
     error "Unknown option to view: #{option}" unless @options.key? option
@@ -96,7 +96,12 @@ class OptionsConfig
     opt_just = @options.keys.max_by(&:length).length
     val_just = @options.values.map(&:to_s).max_by(&:length).length
     @options.each do |option, value|
-      puts "#{option.to_s.ljust opt_just}: #{value.to_s.rjust val_just}"
+      print "#{option.to_s.ljust opt_just}: #{value.inspect.rjust val_just} "
+      if value == @default[option]
+        puts "(default)"
+      else
+        puts "(default = #{@default[option].inspect})"
+      end
     end
     exit
   end
@@ -104,8 +109,15 @@ class OptionsConfig
   private
 
   # Loads config JSON into runtime to use as default options.
+  # Checks for any invalid keys in the JSON. Outputs an error message and 
+  # exits if present.
   def load_json
     @options = JSON.parse(@path.read, symbolize_names: true)
+    @options.each_key do |key|
+      unless @default.key? key
+        error "Unknown option to load from config file: #{key}"
+      end
+    end
   end
 
   # Save options to the JSON file to use as default options.
