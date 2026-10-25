@@ -18,7 +18,7 @@ gem specific_install https://github.com/TheGittyPerson/morse_trainer
 
 ## Usage
 
-TODO
+Simply run `weather_app` to start the program.
 
 ## Contributing
 
